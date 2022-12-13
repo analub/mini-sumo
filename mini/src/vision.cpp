@@ -7,31 +7,31 @@ using namespace std;
     
     //digital
     if(front_sensor.enemy_close){
-      enemy_position = EnemyPosition :: FRONT;
+      /*this->*/EnemyPosition::Pos enemy_position = EnemyPosition::Pos::FRONT;
       return;
     }
     if(full_left_sensor.enemy_close){
-      this->enemy_position = EnemyPosition :: FULL_LEFT;
+      /*this->*/EnemyPosition::Pos enemy_position = EnemyPosition :: Pos :: FULL_LEFT;
       return;
     }
     if(full_right_sensor.enemy_close){
-      this->enemy_position = EnemyPosition :: FULL_RIGHT;
+      /*this->*/EnemyPosition::Pos enemy_position= EnemyPosition :: Pos :: FULL_RIGHT;
       return;
     }
     
     //analogico
     if(left_sensor.distance_cm <=20 && right_sensor.distance_cm <=20){
-      this->enemy_position = EnemyPosition :: FRONT;
+      /*this->*/EnemyPosition::Pos enemy_position = EnemyPosition :: Pos :: FRONT;
       return;
     }
     if(left_sensor.distance_cm <=20 && right_sensor.distance_cm >20){
-      this->enemy_position = EnemyPosition :: LEFT;
-      this->latest_enemy_position = EnemyPosition :: LEFT;
+      /*this->*/EnemyPosition::Pos enemy_position = EnemyPosition :: Pos :: LEFT;
+      /*this->*/latest_enemy_position = EnemyPosition :: Pos :: LEFT;
       return;
     }
     if(left_sensor.distance_cm >20 && right_sensor.distance_cm <=20){
-      this->enemy_position = EnemyPosition :: RIGHT;
-      this->latest_enemy_position = EnemyPosition :: RIGHT;
+     /*this->*/EnemyPosition::Pos enemy_position = EnemyPosition :: Pos :: RIGHT;
+     /*this->*/latest_enemy_position = EnemyPosition :: Pos :: RIGHT;
       return;
     }
 

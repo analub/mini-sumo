@@ -1,5 +1,6 @@
 #include <iostream>
-#include "digital_sensor.h"
+#include "../inc/digital_sensor.h"
+#include <Arduino.h>
 
 using namespace std;
 

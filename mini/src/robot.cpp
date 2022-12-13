@@ -1,5 +1,5 @@
 #include <iostream>
-#include "robot.h"
+#include "../inc/robot.h"
 using namespace std;
 
   Robot :: Robot() :           
