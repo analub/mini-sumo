@@ -10,17 +10,14 @@ using namespace std;
   };
 
   int DigitalSensor :: readSensor(){                //leitura do sensor, inimigo perto
-    this -> raw_reading = digitalRead(this->pin);
+    this->raw_reading = digitalRead(this->pin);
     
-    if(this-> raw_reading==1)
+    if(this->raw_reading==1)
       this->enemy_close = true;
     else 
       this->enemy_close = false;
     
-    if (this->enemy_close == 1)    
-      return this->enemy_close;
-    else
-      return 0;   
+      return this->enemy_close; 
   }
 
   /*
