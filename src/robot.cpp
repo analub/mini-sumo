@@ -1,9 +1,11 @@
 #include <iostream>
-#include "robot.h"
+#include "../inc/robot.h"
 using namespace std;
 
-  Robot :: Robot() :           
-ustart(MICRO_START_SIGNAL_PIN),front_sensor(FRONT_SENSOR_PIN),full_left_sensor(FULL_LEFT_SENSOR_PIN), full_right_sensor(FULL_RIGHT_SENSOR_PIN), left_sensor(LEFT_SENSOR_PIN), right_sensor(RIGHT_SENSOR_PIN), left_motor(LEFT_MOTOR_PWM_PIN, LEFT_MOTOR_IN1_PIN, LEFT_MOTOR_IN2_PIN, LEFT_MOTOR_SPEED_CONST), right_motor(RIGHT_MOTOR_PWM_PIN, RIGHT_MOTOR_IN1_PIN, RIGHT_MOTOR_IN2_PIN, RIGHT_MOTOR_SPEED_CONST), vision()
+  Robot :: Robot() : ustart(MICRO_START_SIGNAL_PIN),front_sensor(FRONT_SENSOR_PIN),full_left_sensor(FULL_LEFT_SENSOR_PIN), 
+  full_right_sensor(FULL_RIGHT_SENSOR_PIN), left_sensor(LEFT_SENSOR_PIN), right_sensor(RIGHT_SENSOR_PIN), 
+  left_motor(LEFT_MOTOR_PWM_PIN, LEFT_MOTOR_IN1_PIN, LEFT_MOTOR_IN2_PIN, LEFT_MOTOR_SPEED_CONST), 
+  right_motor(RIGHT_MOTOR_PWM_PIN, RIGHT_MOTOR_IN1_PIN, RIGHT_MOTOR_IN2_PIN, RIGHT_MOTOR_SPEED_CONST), vision()
   {
     this-> robot_state = RobotState :: AWAITING_START; //começa esperando
   }

@@ -1,5 +1,6 @@
 #include <iostream>
-#include "strategy.h"
+#include "../inc/strategy.h"
+#include <Arduino.h>
 
 using namespace std;
 
