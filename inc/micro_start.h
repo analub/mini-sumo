@@ -1,7 +1,7 @@
 #ifndef MICRO_START_H
 #define MICRO_START_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 namespace uStartState
 {
