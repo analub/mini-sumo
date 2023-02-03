@@ -21,27 +21,24 @@ using namespace std;
 
   void Robot :: update(){
     ustart.update();
-    
+    vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
+
     if(ustart.state == uStartState :: START){
-      left_motor.setPower(100);
-      delay(200);
-      right_motor.setPower(0);
-      //gira para direita
+      
+      Move initial_move_1(100,0,200);
+      initial_move_1.update(this->left_motor, this->right_motor);
+      vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
-      left_motor.setPower(50);
-      delay(1000);
-      right_motor.setPower(50);
-      delay(1000);
-      //anda pra frente
+      if(initial_move_1.update(this->left_motor, this->right_motor) == true){
+        Move initial_move_2(50,50,1000);
+        initial_move_2.update(this->left_motor, this->right_motor);
+        vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
-      left_motor.setPower(0);
-      right_motor.setPower(100);
-      delay(400);
-      //gira para esquerda
-
-      this-> robot_state = RobotState :: INITIAL_STRATEGY;
-
-    }else 
-        this-> robot_state = RobotState :: STOPPED;
-
+        if(initial_move_2.update(this->left_motor, this->right_motor) == true){
+          Move initial_move_3(100,0,400);
+          initial_move_3.update(this->left_motor, this->right_motor);
+          vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);    
+        }
+      }
+    }
   }
