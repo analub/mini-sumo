@@ -21,9 +21,21 @@ using namespace std;
 
   void Robot :: update(){
     ustart.update();
-    
-    if(ustart.state == 1)     //start 
-      this-> robot_state = RobotState :: INITIAL_STRATEGY;
-    else // parar
-      this-> robot_state = RobotState :: STOPPED;
+    this->readSensors();
+    vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
+
+    if(ustart.state == uStartState :: START){
+      static Move initial_move_1(100,0,200);
+      initial_move_1.update(this->left_motor, this->right_motor);
+
+      if(initial_move_1.update(this->left_motor, this->right_motor) == true){
+        static Move initial_move_2(50,50,1000);
+        initial_move_2.update(this->left_motor, this->right_motor);
+
+        if(initial_move_2.update(this->left_motor, this->right_motor) == true){
+          static Move initial_move_3(100,0,400);
+          initial_move_3.update(this->left_motor, this->right_motor);
+        }
+      }
+    }
   }
