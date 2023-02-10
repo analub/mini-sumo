@@ -21,23 +21,20 @@ using namespace std;
 
   void Robot :: update(){
     ustart.update();
+    this->readSensors();
     vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
     if(ustart.state == uStartState :: START){
-      
-      Move initial_move_1(100,0,200);
+      static Move initial_move_1(100,0,200);
       initial_move_1.update(this->left_motor, this->right_motor);
-      vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
       if(initial_move_1.update(this->left_motor, this->right_motor) == true){
-        Move initial_move_2(50,50,1000);
+        static Move initial_move_2(50,50,1000);
         initial_move_2.update(this->left_motor, this->right_motor);
-        vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
         if(initial_move_2.update(this->left_motor, this->right_motor) == true){
-          Move initial_move_3(100,0,400);
+          static Move initial_move_3(100,0,400);
           initial_move_3.update(this->left_motor, this->right_motor);
-          vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);    
         }
       }
     }
