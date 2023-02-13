@@ -31,9 +31,48 @@ using namespace std;
       right_motor.setPower(0);
       this->finished = true;      
     }
-  return finished;
+  return this->finished;
   }
 
+  //InitialStrategy
+
+
+
+
+  //AutoStrategy
+
+  void AutoStrategy :: updateMotors(Vision &vision, MotorControl &left_motor, MotorControl &right_motor){
+  this->left_motor_power = 0;
+  this->right_motor_power = 0;
+    
+  //criar condições para cada posição do inimigo
+
+  switch(vision.enemy_position){
+    case    EnemyPosition::FRONT:
+            left_motor.setPower(100);
+            right_motor.setPower(100);
+            break;
+          
+    case    EnemyPosition::FULL_LEFT:
+            left_motor.setPower(20);
+            right_motor.setPower(90);
+            break;
+
+    case    EnemyPosition::FULL_RIGHT:
+            left_motor.setPower(90);
+            right_motor.setPower(20);
+            break;
+    
+    case    EnemyPosition::LEFT:
+            left_motor.setPower(30);
+            right_motor.setPower(90);
+            break;
+              
+    case    EnemyPosition::RIGHT:
+            left_motor.setPower(90);
+            right_motor.setPower(30);
+            break;
+  }
 
   
     

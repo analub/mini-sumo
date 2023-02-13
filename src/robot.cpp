@@ -37,5 +37,13 @@ using namespace std;
           initial_move_3.update(this->left_motor, this->right_motor);
         }
       }
+      //estratégia inicial
+
+      //estratégia autonoma
+
+    }else{
+      this->robot_state = RobotState ::STOPPED;
+      this->left_motor.setPower(0);
+      this->right_motor.setPower(0);
     }
   }
