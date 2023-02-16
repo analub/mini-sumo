@@ -42,7 +42,7 @@ using namespace std;
   }
 
   bool InitialStrategy :: update(MotorControl &left_motor, MotorControl&right_motor){
-    this->current_move.update(left_motor, right_motor);     //atualiza o estado do ultimo movimento
+    this->current_move.update(left_motor, right_motor);
     
     if(current_move.update(left_motor, right_motor) == true){
       //primeiro movimento sai e passa para próximo
@@ -56,10 +56,6 @@ using namespace std;
   }
 
   InitialStrategy* get_selected_strategy(int pinA, int pinB, int pinC){
-    //analisar os estados dos pinos
-    //definir uma sequencia de movimentos para cada uma das 8 estratégias >> switch case
-    //cada pino: ALTO ou BAIXO, 1 ou 0
-
     std :: list<Move> moves;
     int option = pinA + (2*pinB) + (4*pinC);      //pinA: menos significativo
 
@@ -127,8 +123,6 @@ using namespace std;
   void AutoStrategy :: updateMotors(Vision &vision, MotorControl &left_motor, MotorControl &right_motor){
   this->left_motor_power = 0;
   this->right_motor_power = 0;
-    
-  //criar condições para cada posição do inimigo
 
   switch(vision.enemy_position){
     case    EnemyPosition::FRONT:
