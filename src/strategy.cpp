@@ -21,8 +21,8 @@ using namespace std;
     }
 
     if(this->finished == false){
-    left_motor.setPower(this->left_motor_power);
-    right_motor.setPower(this->right_motor_power);
+      left_motor.setPower(this->left_motor_power);
+      right_motor.setPower(this->right_motor_power);
     }
 
     //termina quando chegar no tempo determinado
@@ -46,12 +46,14 @@ using namespace std;
     
     if(current_move.update(left_motor, right_motor) == true){
       //primeiro movimento sai e passa para próximo
-      moves.pop_front();
-      this->current_move = moves.front();
+      this->moves.pop_front();
+
+      if(!(this->moves.empty())   //so passa pro proximo se a lista não estiver vazia
+        this->current_move = this->moves.front();
     }
 
-    //verifica se lista está fazia pra finalizar estratégia
-    if(moves.empty())
+    //verifica se lista está vazia pra finalizar estratégia
+    if(this->moves.empty())
       this->strategy_finished = true;
   }
 

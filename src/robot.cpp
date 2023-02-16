@@ -20,9 +20,9 @@ using namespace std;
   }
 
   void Robot :: update(){
-    ustart.update();
+    this->ustart.update();
     this->readSensors();
-    vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
+    this->vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
     if(ustart.state == uStartState :: START){
 
@@ -32,14 +32,14 @@ using namespace std;
 
       }else
         if(robot_state == RobotState::INITIAL_STRATEGY){
-            initial_strategy->update(this->left_motor, this->right_motor);
+            this->initial_strategy->update(this->left_motor, this->right_motor);
 
             if(initial_strategy->update(this->left_motor, this->right_motor)==true)
                this->robot_state = RobotState::AUTO_STRATEGY;
   
           }else 
             if(robot_state == RobotState::AUTO_STRATEGY)
-              auto_strategy.updateMotors(this->vision, this->left_motor, this->right_motor);
+              this->auto_strategy.updateMotors(this->vision, this->left_motor, this->right_motor);
         
     }else{
       this->robot_state = RobotState :: STOPPED;
