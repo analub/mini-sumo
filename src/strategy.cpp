@@ -36,8 +36,91 @@ using namespace std;
 
   //InitialStrategy
 
+  InitialStrategy :: InitialStrategy(std :: list<Move> moves) : current_move(moves.front()){
+    this->strategy_finished = false;
+    this->moves = moves;
+  }
 
+  bool InitialStrategy :: update(MotorControl &left_motor, MotorControl&right_motor){
+    this->current_move.update(left_motor, right_motor);     //atualiza o estado do ultimo movimento
+    
+    if(current_move.update(left_motor, right_motor) == true){
+      //primeiro movimento sai e passa para próximo
+      moves.pop_front();
+      this->current_move = moves.front();
+    }
 
+    //verifica se lista está fazia pra finalizar estratégia
+    if(moves.empty())
+      this->strategy_finished = true;
+  }
+
+  InitialStrategy* get_selected_strategy(int pinA, int pinB, int pinC){
+    //analisar os estados dos pinos
+    //definir uma sequencia de movimentos para cada uma das 8 estratégias >> switch case
+    //cada pino: ALTO ou BAIXO, 1 ou 0
+
+    std :: list<Move> moves;
+    int option = pinA + (2*pinB) + (4*pinC);      //pinA: menos significativo
+
+    switch(option){
+      case 0:
+              //direita, frente, esquerda
+              moves.push_back(Move(100,0,200));
+              moves.push_back(Move(50,50,1000));
+              moves.push_back(Move(0,100,400));
+              break;
+
+      case 1:
+              //esquerda, frente, direita
+              moves.push_back(Move(0,100,200));
+              moves.push_back(Move(50,50,1000));
+              moves.push_back(Move(100,0,400));
+              break;
+
+      case 2:
+              //direita, frente, esquerda, frente
+              moves.push_back(Move(100,0,200));
+              moves.push_back(Move(90,90,1000));
+              moves.push_back(Move(0,100,200));
+              moves.push_back(Move(90,90,1000));
+              break;
+
+      case 3: 
+              //esquerda, frente, direita, frente
+              moves.push_back(Move(0,100,200));
+              moves.push_back(Move(90,90,1000));
+              moves.push_back(Move(100,0,200));
+              moves.push_back(Move(90,90,1000));
+              break;
+      case 4:
+              //frente, frente, esquerda, frente, direita
+              moves.push_back(Move(90,90,2000));
+              moves.push_back(Move(0,100,200));
+              moves.push_back(Move(90,90,1000));
+              moves.push_back(Move(100,0,200));
+              break;
+        
+      case 5: 
+              //frente, frente, direita, frente, esquerda
+              moves.push_back(Move(90,90,2000));
+              moves.push_back(Move(100,0,200));
+              moves.push_back(Move(90,90,1000));
+              moves.push_back(Move(0,100,200));
+              break;
+      
+      case 6: 
+              //frente
+              moves.push_back(Move(100,100,1000));
+              break;
+      
+      case 7:  
+              //esquerda, esquerda, frente - virar
+              moves.push_back(Move(0,100,2000));
+              moves.push_back(Move(100,100,1000));
+              break;
+    } 
+  }
 
   //AutoStrategy
 
@@ -72,6 +155,7 @@ using namespace std;
             left_motor.setPower(90);
             right_motor.setPower(30);
             break;
+    }
   }
 
   
