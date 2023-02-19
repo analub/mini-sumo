@@ -35,6 +35,8 @@ using namespace std;
 #define STRATEGY_PIN_B 22
 #define STRATEGY_PIN_C 23
 
+#define STDBY 5
+
 namespace RobotState
 {
   enum States

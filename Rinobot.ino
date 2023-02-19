@@ -13,9 +13,11 @@ void setup()
   pinMode(FRONT_SENSOR_PIN, INPUT);
   pinMode(LEFT_SENSOR_PIN, INPUT);
   pinMode(RIGHT_SENSOR_PIN, INPUT);
+  pinMode(FULL_LEFT_SENSOR_PIN, INPUT);  
+  pinMode(FULL_RIGHT_SENSOR_PIN, INPUT);
   pinMode(MICRO_START_SIGNAL_PIN, INPUT);
   
-  /*pinMode(STDBY,OUTPUT);
+  pinMode(STDBY,OUTPUT);
   digitalWrite(STDBY,HIGH);
 
   ledcAttachPin(LEFT_MOTOR_PWM_PIN, LEFT_MOTOR_CHANNEL);
@@ -32,7 +34,7 @@ void loop()
   Serial.println("RUN");
   digitalWrite(17, HIGH);
   digitalWrite(16, LOW);
-  /*ledcWrite(LEFT_MOTOR_CHANNEL, 255);
+  ledcWrite(LEFT_MOTOR_CHANNEL, 255);
   dacWrite(LEFT_MOTOR_PWM_PIN, 255);
   delay(1000);
   ledcWrite(LEFT_MOTOR_CHANNEL, 0);
@@ -40,7 +42,6 @@ void loop()
   delay(1000);
   ledcWrite(LEFT_MOTOR_CHANNEL, 125);
   dacWrite(LEFT_MOTOR_PWM_PIN, 0);
- */
 
   static Robot robot;
   robot.update();
