@@ -48,14 +48,15 @@ using namespace std;
       //primeiro movimento sai e passa para próximo
       this->moves.pop_front();
 
-      if(!(this->moves.empty())   //so passa pro proximo se a lista não estiver vazia
+      if(!(this->moves.empty()))  //so passa pro proximo se a lista não estiver vazia
         this->current_move = this->moves.front();
     }
-
     //verifica se lista está vazia pra finalizar estratégia
     if(this->moves.empty())
       this->strategy_finished = true;
-  }
+
+      return this->strategy_finished;
+    }
 
   InitialStrategy* get_selected_strategy(int pinA, int pinB, int pinC){
     std :: list<Move> moves;
@@ -117,7 +118,8 @@ using namespace std;
               moves.push_back(Move(0,100,2000));
               moves.push_back(Move(100,100,1000));
               break;
-    } 
+    }
+  return new InitialStrategy(moves);
   }
 
   //AutoStrategy
@@ -133,23 +135,33 @@ using namespace std;
             break;
           
     case    EnemyPosition::FULL_LEFT:
-            left_motor.setPower(20);
-            right_motor.setPower(90);
+            left_motor.setPower(10);
+            right_motor.setPower(100);
             break;
 
     case    EnemyPosition::FULL_RIGHT:
-            left_motor.setPower(90);
-            right_motor.setPower(20);
+            left_motor.setPower(100);
+            right_motor.setPower(10);
             break;
     
     case    EnemyPosition::LEFT:
-            left_motor.setPower(30);
+            left_motor.setPower(20);
             right_motor.setPower(90);
             break;
               
     case    EnemyPosition::RIGHT:
             left_motor.setPower(90);
-            right_motor.setPower(30);
+            right_motor.setPower(20);
+            break;
+
+    case    EnemyPosition :: SEARCH_LEFT:
+            left_motor.setPower(20);
+            right_motor.setPower(90);
+            break;
+
+    case    EnemyPosition :: SEARCH_RIGHT:
+            left_motor.setPower(90);
+            right_motor.setPower(20);
             break;
     }
   }

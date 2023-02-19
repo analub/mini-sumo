@@ -25,6 +25,7 @@ using namespace std;
     this->vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
     if(ustart.state == uStartState :: START){
+      this->robot_state = RobotState::AWAITING_START;
 
       if(robot_state == RobotState::AWAITING_START){
         this->initial_strategy = get_selected_strategy(STRATEGY_PIN_A , STRATEGY_PIN_B, STRATEGY_PIN_C);
