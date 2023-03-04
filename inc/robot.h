@@ -35,6 +35,8 @@ using namespace std;
 #define STRATEGY_PIN_B 22
 #define STRATEGY_PIN_C 23
 
+#define STDBY 5
+
 namespace RobotState
 {
   enum States
@@ -61,7 +63,7 @@ public:
   MotorControl left_motor;
   MotorControl right_motor;
   Vision vision;
-  InitialStrategy *initial_strategy;  //nao precisa
+  InitialStrategy *initial_strategy;
   AutoStrategy auto_strategy;
 
   void readSensors();

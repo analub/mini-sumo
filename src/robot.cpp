@@ -20,22 +20,31 @@ using namespace std;
   }
 
   void Robot :: update(){
-    ustart.update();
+    this->ustart.update();
     this->readSensors();
-    vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
+    this->vision.updateEnemyPosition(this->front_sensor, this->full_left_sensor, this->full_right_sensor, this->left_sensor, right_sensor);
 
     if(ustart.state == uStartState :: START){
-      static Move initial_move_1(100,0,200);
-      initial_move_1.update(this->left_motor, this->right_motor);
+      this->robot_state = RobotState::AWAITING_START;
 
-      if(initial_move_1.update(this->left_motor, this->right_motor) == true){
-        static Move initial_move_2(50,50,1000);
-        initial_move_2.update(this->left_motor, this->right_motor);
+      if(robot_state == RobotState::AWAITING_START){
+        this->initial_strategy = get_selected_strategy(STRATEGY_PIN_A , STRATEGY_PIN_B, STRATEGY_PIN_C);
+        this->robot_state = RobotState::INITIAL_STRATEGY;
 
-        if(initial_move_2.update(this->left_motor, this->right_motor) == true){
-          static Move initial_move_3(100,0,400);
-          initial_move_3.update(this->left_motor, this->right_motor);
-        }
-      }
+      }else
+        if(robot_state == RobotState::INITIAL_STRATEGY){
+            this->initial_strategy->update(this->left_motor, this->right_motor);
+
+            if(initial_strategy->update(this->left_motor, this->right_motor)==true)
+               this->robot_state = RobotState::AUTO_STRATEGY;
+  
+          }else 
+            if(robot_state == RobotState::AUTO_STRATEGY)
+              this->auto_strategy.updateMotors(this->vision, this->left_motor, this->right_motor);
+        
+    }else{
+      this->robot_state = RobotState :: STOPPED;
+      this->left_motor.setPower(0);
+      this->right_motor.setPower(0);
     }
   }
